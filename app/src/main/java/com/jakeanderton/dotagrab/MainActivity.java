@@ -25,8 +25,8 @@ public class MainActivity extends Activity
 
         gridLayout = (GridLayout) findViewById(R.id.gridLayout);
 
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        new ImageDownloader(imageView).execute("http://cdn.dota2.com/apps/dota2/images/heroes/drow_ranger_full.png");
+        //ImageView imageView = (ImageView) findViewById(R.id.imageView);
+      //  new ImageDownloader(imageView).execute("http://cdn.dota2.com/apps/dota2/images/heroes/drow_ranger_full.png");
         new HeroDownloader(this).execute();
        // populateImages();
 
@@ -47,22 +47,20 @@ public class MainActivity extends Activity
                 String heroName = jsonObject.getString("name");
                 heroName = heroName.substring(14);
 
-                Log.i("hero name: ",heroName);
+                Log.i("hero name: ", heroName);
+
+                ImageView heroIcon = new ImageView(this);
+                Log.i("hero url: ", "http://cdn.dota2.com/apps/dota2/images/heroes/" + heroName + "_full.png");
+                new ImageDownloader(heroIcon).execute("http://cdn.dota2.com/apps/dota2/images/heroes/" + heroName + "_full.png");
+                imageViewArrayList.add(i, heroIcon);
+
+                addToGridView(i,heroIcon);
 
 
 
 
 
-
-
-
-               // gridLayout.addView(imTemp, i);
-
-
-
-
-
-            } catch (JSONException e)
+        } catch (JSONException e)
             {
                 e.printStackTrace();
             }
@@ -73,6 +71,18 @@ public class MainActivity extends Activity
 
         //HeroDownloader.heroesObject;
 
+    }
+
+    private void addToGridView(final int index, final ImageView heroIcon)
+    {
+        runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                gridLayout.addView(heroIcon, index);
+            }
+        });
     }
 
 }

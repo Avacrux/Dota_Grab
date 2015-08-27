@@ -75,13 +75,6 @@ public class HeroDownloader extends AsyncTask<Void, Void, Void>
             mainActivity.populateImages();
 
 
-            //Log.i("Heroes Array entries: ",(Integer.toString(heroesArray.length())));
-
-            //JSONArray jArray = jObject.getJSONArray("heroes");
-            //System.out.println(jArray.get(1));
-
-            //outputHeroes(jArray);
-
         } catch (JSONException e)
         {
             e.printStackTrace();
@@ -99,7 +92,4 @@ public class HeroDownloader extends AsyncTask<Void, Void, Void>
         return null;
     }
 
-    private void outputHeroes(JSONArray jArray)
-    {
-    }
 }
